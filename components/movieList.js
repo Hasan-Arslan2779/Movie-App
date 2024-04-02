@@ -10,10 +10,11 @@ import {
 import React from "react";
 import { styles } from "../theme";
 import { useNavigation } from "@react-navigation/native";
+import { image185, image500 } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 
-export default function MovieList({ title, data }) {
+export default function MovieList({ title, data, hideSeeAll }) {
   let movieName = "War";
   const navigation = useNavigation();
 
@@ -21,11 +22,13 @@ export default function MovieList({ title, data }) {
     <View className="mt-8 space-y-4">
       <View className="mx-4 flex-row justify-between items-center">
         <Text className="text-white text-xl">{title}</Text>
-        <TouchableOpacity>
-          <Text style={styles.text} className="text-lg">
-            See All
-          </Text>
-        </TouchableOpacity>
+        {!hideSeeAll && (
+          <TouchableOpacity>
+            <Text style={styles.text} className="text-lg">
+              See All
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
       <ScrollView
         horizontal
@@ -38,21 +41,24 @@ export default function MovieList({ title, data }) {
           return (
             <TouchableWithoutFeedback
               key={index}
-              onPress={() => navigation.navigate("Movie", item)}
+              onPress={() => navigation.push("Movie", item)}
             >
               <View className="space-y-1 mr-4">
                 <Image
-                  source={require("../assets/1.jpeg")}
+                  // source={require("../assets/1.jpeg")}
+                  source={{
+                    uri: `https://image.tmdb.org/t/p/w185${item.poster_path} `,
+                  }}
                   style={{
                     width: width * 0.33,
                     height: height * 0.22,
                   }}
                   className="rounded-3xl"
                 />
-                <Text className="text-neutral-300 ml3">
-                  {movieName.length > 14
-                    ? movieName.slice(0, 14) + "..."
-                    : movieName}
+                <Text className="text-neutral-300 text-center">
+                  {item.title?.length > 14
+                    ? item.title.slice(0, 14) + "..."
+                    : item.title}
                 </Text>
               </View>
             </TouchableWithoutFeedback>
