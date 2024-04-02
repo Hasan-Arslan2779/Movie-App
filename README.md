@@ -24,3 +24,9 @@
  * Scroll View: It is a component that allows users to scroll content vertically.
  * Axios: A JavaScript library used to make HTTP requests and exchange data.
  * Data pulled from TMDB, the popular movie and TV database.
+
+
+
+
+### Project Video
+https://github.com/Hasan-Arslan2779/Movie-App/assets/110454677/f920b2fb-25e8-487e-87cc-403afd52ddbc
